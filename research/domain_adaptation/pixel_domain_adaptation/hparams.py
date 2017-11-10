@@ -86,7 +86,7 @@ def create_hparams(hparam_string=None):
       #  svhn: Classifier used for SVHN
       #  mnist: Classifier used for MNIST
       #  pose_mini: Classifier + regressor used for pose_mini
-      task_tower='doubling_pose_estimator',
+      task_tower='lung',
       weight_decay_task_classifier=1e-5,
       source_task_loss_weight=1.0,
       transferred_task_loss_weight=1.0,
