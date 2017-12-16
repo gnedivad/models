@@ -354,10 +354,10 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('master', '', 'BNS name of the TensorFlow master to use.')
 
-flags.DEFINE_string('checkpoint_dir', 'C:/tmp/data/checkpoints',
+flags.DEFINE_string('checkpoint_dir', 'C:/tmp/data/lung_10k_smoothing/checkpoints_22',
                     'Directory where the model was written to.')
 
-flags.DEFINE_string('eval_dir', 'C:/tmp/data/results',
+flags.DEFINE_string('eval_dir', 'C:/tmp/data/lung_10k_smoothing/results_x',
                     'Directory where the results are saved to.')
 
 flags.DEFINE_integer('eval_interval_secs', 60,
@@ -376,7 +376,7 @@ flags.DEFINE_string('target_dataset', 'lung_m',
 
 flags.DEFINE_string(
     'dataset_dir',
-    'C:/tmp/data',  # None,
+    'C:/tmp/data/lung_10k_smoothing/1300_1301_128',  # None,
     'The directory where the datasets can be found.')
 
 flags.DEFINE_integer(
@@ -478,7 +478,6 @@ def run_eval(run_dir, checkpoint_dir, hparams):
 
       num_batches = math.ceil(num_examples / float(hparams.batch_size))
       global_step = slim.get_or_create_global_step()
-
       result = slim.evaluation.evaluate_once(
           master=FLAGS.master,
           checkpoint_path=checkpoint_path,
@@ -487,6 +486,12 @@ def run_eval(run_dir, checkpoint_dir, hparams):
           eval_op=list(names_to_updates.values()),
           final_op=names_to_values)
       tf.logging.info(result)
+      images = slim.evaluation.evaluate_once(
+          master=FLAGS.master,
+          checkpoint_path=checkpoint_path,
+          logdir=run_dir,
+          final_op=end_points['transferred_real_images'])
+      # tf.logging.info(images[0])
 
 
 def to_degrees(log_quaternion_loss):

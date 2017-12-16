@@ -10,13 +10,13 @@ from slim.datasets import dataset_utils
 
 slim = tf.contrib.slim
 
-_FILE_PATTERN = 'lung_%s.tfrecord'
+_FILE_PATTERN = 'lung_32_%s.tfrecord'
 
-_SPLITS_TO_SIZES = {'train': 1000, 'valid': 100, 'test': 1000, 'uint8': 900, 'float32': 900}
+_SPLITS_TO_SIZES = {'train': 10000, 'valid': 100, 'test': 1000, 'uint8': 900, 'float32': 900}
 
 _ITEMS_TO_DESCRIPTIONS = {
-  'real_image': 'A [128 x 128 x 1] RGB image.',
-  'virtual_image': 'A [128 x 128 x 1] RGB image.',
+  'real_image': 'A [32 x 32 x 1] RGB image.',
+  'virtual_image': 'A [32 x 32 x 1] RGB image.',
   'label': 'A float32 vector of length 6',
 }
 
@@ -56,14 +56,14 @@ def get_split(split_name, dataset_dir, file_pattern=None, reader=None):
     'real_image': slim.tfexample_decoder.Image(
       image_key='real_image',
       format_key='images/format',
-      shape=[128, 128, 1],  # required after my hack in
+      shape=[32, 32, 1],  # required after my hack in
                             # tensorflow/contrib/slim/python/slim/data/tfexample_decoder.py
       channels=1,           # unused after above hack
       dtype=tf.float32),
     'virtual_image': slim.tfexample_decoder.Image(
       image_key='virtual_image',
       format_key='images/format',
-      shape=[128, 128, 1],
+      shape=[32, 32, 1],
       channels=1,
       dtype=tf.float32),
     'label': slim.tfexample_decoder.Image(

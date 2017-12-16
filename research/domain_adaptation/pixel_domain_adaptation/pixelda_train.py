@@ -438,7 +438,7 @@ flags.DEFINE_integer(
     'The Task ID. This value is used when training with multiple workers to '
     'identify each worker.')
 
-flags.DEFINE_string('train_log_dir', '/tmp/pixelda/',
+flags.DEFINE_string('train_log_dir', 'C:/tmp/data/lung_10k_smoothing/checkpoints_25',
                     'Directory where to write event logs.')
 
 flags.DEFINE_integer(
@@ -467,7 +467,7 @@ flags.DEFINE_string('source_split_name', 'train',
 flags.DEFINE_string('target_split_name', 'train',
                     'Name of the train split for the target.')
 
-flags.DEFINE_string('dataset_dir', 'C:/tmp/data',
+flags.DEFINE_string('dataset_dir', 'C:/tmp/data/lung_10k_smoothing/1300_1301_1k',
                     'The directory where the datasets can be found.')
 
 flags.DEFINE_integer(
@@ -606,7 +606,7 @@ def _train(discriminator_train_op,
           tf.logging.info('Step %d: Generator Loss = %.2f', np_global_step,
                           loss)
 
-      if np_global_step > 500000:
+      if np_global_step > 250000:
         return loss
   return loss
 

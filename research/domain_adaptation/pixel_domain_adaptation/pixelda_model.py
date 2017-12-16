@@ -837,7 +837,9 @@ def create_model(hparams,
           transferred_real_images = tf.tile(source_real_images, [1, 1, 1, 3])
         if source_channels == 3 and target_channels == 1:
           transferred_real_images = tf.image.rgb_to_grayscale(source_real_images)
-        end_points = {'transferred_real_images': transferred_real_images}
+        end_points = {
+          'transferred_images': transferred_real_images,
+          'transferred_real_images': transferred_real_images,}
       else:
         raise ValueError('Unknown architecture: %s' % hparams.arch)
 

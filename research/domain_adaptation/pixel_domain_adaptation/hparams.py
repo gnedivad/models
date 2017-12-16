@@ -149,7 +149,7 @@ def create_hparams(hparam_string=None):
       # Loss Hyperparameters #
       ########################
       domain_loss_weight=1.0,
-      style_transfer_loss_weight=1.0,
+      style_transfer_loss_weight=1.0,  # Whether G tricks D
 
       ########################################################################
       # Encourages the transferred images to be similar to the source images #
@@ -158,7 +158,7 @@ def create_hparams(hparam_string=None):
 
       # The weight of the loss function encouraging the source and transferred
       # images to be similar. If set to 0, then the loss function is not used.
-      transferred_similarity_loss_weight=0.0,
+      transferred_similarity_loss_weight=1.0,
 
       # The type of loss used to encourage transferred and source image
       # similarity. Valid values include:
@@ -178,7 +178,7 @@ def create_hparams(hparam_string=None):
       ################################
       # Optimization Hyperparameters #
       ################################
-      learning_rate=0.001,
+      learning_rate=0.0001,
       batch_size=32,
       lr_decay_steps=20000,
       lr_decay_rate=0.95,

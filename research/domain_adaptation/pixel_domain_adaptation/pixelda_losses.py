@@ -617,8 +617,8 @@ def _add_task_specific_losses(end_points, source_labels, hparams,
   #       'Transferred',
   #       add_summaries)
 
-  # if add_summaries:
-  #   tf.summary.scalar('Task_Loss_Total', total_loss)
+  if add_summaries:
+    tf.summary.scalar('Task_Loss_Total', total_loss)
 
   return total_loss
 
@@ -746,14 +746,14 @@ def g_step_loss(source_images, source_labels, end_points, hparams):  # , num_cla
   tf.summary.scalar('Style_transfer_loss', style_transfer_loss)
   generator_loss += style_transfer_loss
 
-  # # Optimizes the style transfer network to produce transferred images similar
-  # # to the source images.
-  # generator_loss += _transferred_similarity_loss(
-  #     end_points['transferred_images'],
-  #     source_images,
-  #     weight=hparams.transferred_similarity_loss_weight,
-  #     method=hparams.transferred_similarity_loss,
-  #     name='transferred_similarity')
+  # Optimizes the style transfer network to produce transferred images similar
+  # to the source images.
+  generator_loss += _transferred_similarity_loss(
+      end_points['transferred_images'],
+      source_images,
+      weight=hparams.transferred_similarity_loss_weight,
+      method=hparams.transferred_similarity_loss,
+      name='transferred_similarity')
 
   # Optimizes the style transfer network to maximize classification accuracy.
   if source_labels is not None and hparams.task_tower_in_g_step:

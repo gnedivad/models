@@ -5,13 +5,13 @@ from domain_adaptation.datasets import dataset_factory
 
 
 def main():
-  source_dataset = dataset_factory.get_dataset(
-      'lung_m',
-      split_name='float32',
-      dataset_dir='C:/tmp/data')
+  # source_dataset = dataset_factory.get_dataset(
+  #     'lung_m',
+  #     split_name='train',
+  #     dataset_dir='C:/tmp/data/lung_10k_smoothing/1300_1301')
   source_real_images, source_virtual_images, source_labels = (
     dataset_factory.provide_batch(
-      'lung_m', 'float32', 'C:/tmp/data', 4, 32, 4
+      'lung_m', 'train', 'C:/tmp/data/lung_10k_smoothing/1300_1301', 4, 32, 4
     )
   )
 
@@ -34,7 +34,6 @@ def main():
 
   # print(results['source_real_images'].shape)
   # plt.imshow(np.squeeze(results['source_real_images'][0]), cmap='gray')
-
   fig, ax = plt.subplots(nrows=4, ncols=8)
   for i in range(12):  # len(real_images)):
     ax[i%4,i//4*3].imshow(np.squeeze(results['source_real_images'][i]), cmap='gray')
